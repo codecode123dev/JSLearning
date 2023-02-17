@@ -1,0 +1,145 @@
+﻿@model IEnumerable<FPTBOOK.Models.Book>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    .list-product {
+        width: 1200px;
+        margin: auto;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .product {
+        margin-top: 10px;
+        margin-right: 10px;
+        width: 120px;
+        height: 200px;
+    }
+
+    img {
+        width: 100px;
+        height: 100px;
+        display: block;
+        margin: auto;
+    }
+
+    .title {
+        display: block;
+        font-size: 15px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .viewProduct, .addProduct {
+        width: calc((100% - 2px) / 2);
+        display: inline-block;
+        float: left;
+        padding: 2px;
+        font-size: 12px;
+        box-sizing: border-box;
+        color: #fff;
+        background: #808080;
+        text-decoration: none;
+        text-align: center;
+    }
+
+    .addProduct {
+        margin-left: 2px;
+    }
+</style>
+
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+
+
+@*search*@
+<!-- Đoạn cần thêm -->
+    @using (Html.BeginForm())
+    {
+    <p>
+        Name: @Html.TextBox("SearchString") <input type="submit" value="Tìm kiếm" />
+    </p>
+    }
+<!-- Kết thúc -->
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+
+              <td>
+                <img src="~/images/@item.ImageUrl"
+                    class ="rounded-circle"
+                    height="40" width="40"
+                    asp-append-version="true"/>
+            </td>
+
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.Id)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-controller="Books" asp-action="addCart" asp-route-id="@item.Id" class="addProduct">Add Order</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+
+@section scripts{
+    <script>
+
+         function myFunction() {
+            document.getElementById("myText").focus();
+            };
+    </script>
+}
+
+

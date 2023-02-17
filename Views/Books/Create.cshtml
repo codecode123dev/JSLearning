@@ -1,0 +1,119 @@
+﻿@model FPTBOOK.Models.Book
+@{
+ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Book</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                @*<textarea asp-for="Description" class="form-control" ></textarea>*@
+                <textarea asp-for="Description" class="form-control" onKeyPress="return taLimit(this)" 
+                onKeyUp="return taCount(this,'myCounter')" id="content" 
+                rows=7 wrap="physical" cols=40 ></textarea>
+                <b><label style="margin-left: 330px" id="myCounter">100</label></b> 
+
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Date" class="control-label"></label>
+                <input asp-for="Date" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+                <label asp-for="ImageUrl" class="control-label"></label>
+                <input asp-for="ImageUrl" class="form-control" />
+                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+            </div>*@
+
+           @* <div class="form-group">
+            <br/>
+            <textarea class="inputtextfield" onKeyPress="return taLimit(this)" 
+                onKeyUp="return taCount(this,'myCounter')" id="content" name="content" 
+                rows=7 wrap="physical" cols=40></textarea>
+                <b><label style="margin-left: 50px" id="myCounter">2000</label></b> 
+
+                </div>*@
+
+
+
+                 <div class="form-group">
+                <label asp-for="ImageUrl" class="control-label"></label>
+                <div class="custom-file">
+                    <input asp-for="ImageUrl" class="custom-file-input" id="customFile" type="file">
+                </div>
+                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="CategoryId" class="control-label"></label>
+                <select asp-for="CategoryId" class ="form-control" asp-items="ViewBag.CategoryId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+
+
+                maxL = 100;
+          var bName = navigator.appName;
+
+          function taLimit(taObj) {
+            if (taObj.value.length == maxL) return false;
+            return true;
+          }
+
+          function taCount(taObj, Cnt) {
+            objCnt = createObject(Cnt);
+            objVal = taObj.value;
+            if (objVal.length > maxL) objVal = objVal.substring(0, maxL);
+            if (objCnt) {
+              if (bName == "Netscape") {
+                objCnt.textContent = maxL - objVal.length;
+              } else {
+                objCnt.innerText = maxL - objVal.length;
+              }
+            }
+            return true;
+          }
+
+          function createObject(objId) {
+            if (document.getElementById) return document.getElementById(objId);
+            else if (document.layers) return eval("document." + objId);
+            else if (document.all) return eval("document.all." + objId);
+            else return eval("document." + objId);
+          } //End Count content
+
+    </script>
+}

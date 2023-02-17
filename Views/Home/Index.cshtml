@@ -1,0 +1,89 @@
+﻿
+@*////////////////////////////////////////////*@
+@model IEnumerable<FPTBOOK.Models.Book>
+@{
+    ViewData["Title"] = "Home Page";
+
+}
+
+<h4 class="text-center text-uppercase"> List Books </h4>
+
+
+
+
+@*Search*@
+  @using (Html.BeginForm())
+    {
+   @* <p>
+        Name: @Html.TextBox("SearchString") <input type="submit" value="Tìm kiếm" id="myText" />
+    </p>*@
+    
+    
+
+        <input type="search" id="mySearch" placeholder="Search ..">
+
+        <button type="button" onclick="getFocus()">Search</button>
+
+    }
+
+
+
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th> @Html.DisplayNameFor(model => model.ImageUrl) </th>
+            <th> @Html.DisplayNameFor(model => model.Name)</th>
+            <th> @Html.DisplayNameFor(model => model.Price)</th>
+            <th> @Html.DisplayNameFor(model => model.Description) </th>
+            <th> @Html.DisplayNameFor(model => model.Date)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var book in Model)
+        {
+            <tr>
+                <td>
+                    <img src="~/images/@book.ImageUrl" 
+                         class="rounded-circle" 
+                         height="40" width="40" 
+                         asp-append-version="true" />
+                </td>
+                <td> @book.Name </td>
+                <td> @book.Price</td>
+                <td> @book.Description</td>
+                <td> @book.Date</td>
+                <td> <a asp-controller="Books" asp-action="addCart" asp-route-id="@book.Id" class="addProduct">Add Order</a></td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+ @section scripts{
+     <script>
+
+       
+       function getFocus() {
+  document.getElementById("mySearch").focus();
+}
+
+function loseFocus() {
+  document.getElementById("mySearch").blur();
+}
+     </script>
+
+
+ }
+
+
+
+
+
+
+
+
+
+
+
+

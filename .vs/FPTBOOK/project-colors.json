@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "fdeadef2-7db7-4ef9-b680-91df46ba9fa9": {
+      "ProjectGuid": "fdeadef2-7db7-4ef9-b680-91df46ba9fa9",
+      "DisplayName": "FPTBOOK",
+      "ColorIndex": 0
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    }
+  },
+  "NextColorIndex": 1
+}
