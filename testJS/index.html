@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>replace() searches a string for a value, and returns a new string with the specified value(s) replaced:</p>
+
+    <p id="demo">Visit Microsoft!</p>
+
+    <!-- Upper Case -->
+    <p id="upperCase">minh</p>
+    <!-- Lower Case -->
+    <p id="lowerCase"> MINH</p>
+
+
+    <p>Click the button to display an alert box.</p>
+
+    <button onclick="myFunction()">Try it</button>
+
+
+    <p>Array.slice() returns selected array elements as a new array:</p>
+
+    <p>The concat() method concatenates (joins) two or more arrays:</p>
+
+    <p id="demo"></p>
+
+    <p id="demo"></p>
+
+    <p id="demo1"></p>
+
+    <p id="demo2"></p>
+    <div>
+        before:
+        <p id="beforeSort"></p>
+        after:
+        <p id="afterSort"></p>
+    </div>
+
+    <div>
+        <p id="date"></p>
+        <button onclick="showDate()">get date</button>
+    </div>
+
+    <div>
+        click to show year:
+        <button onclick="showYear()"> get full year</button>
+    </div>
+
+    <div>
+        click to show month:
+        <button onclick="showMonth()">get the Month</button>
+    </div>
+
+    <div>
+        Before change :
+        <p id="oldYear"></p>
+
+        set year:
+        <p id="setYear"></p>
+    </div>
+
+    <div>
+        random:
+        <button onclick="randomNumber()">click</button>
+    </div>
+
+    <div>
+        Max : 10 to 20
+        <button onclick="findToMax()">find</button>
+    </div>
+
+    <div>
+        Min : 10 to 20
+        <button onclick="findToMin()">find</button>
+    </div>
+
+    <div>
+        Method Round:
+        <button onclick="nearest_integer()">click</button>
+    </div>
+
+    <div>
+        Square Root number 64 is :
+        <button onclick="squareRoot()">click</button>
+    </div>
+
+    <!-- comparison -->
+
+    <div>
+        <p>Input your age and click the button</p>
+        <input type="number" id="age">
+        <button onclick="comparison()">click</button>
+        <p id="comparison"></p>
+    </div>
+
+    <!-- NaN -->
+    <div>
+        <!-- Return true if it is number otherwise false -->
+        <p id="nan"></p>
+    </div>
+
+
+    <!-- Slice(get element) -->
+
+    <div>
+        <p>name:minh, viet, trung ,huy</p>
+        <p>Slice(get Element)</p>
+        <p id="slice"></p>
+
+    </div>
+
+    <!-- splice(remove element) -->
+
+    <div>
+        <p>name:minh, viet, trung ,huy</p>
+        <p>Splice (remove Element)</p>
+        <p id="splice"></p>
+    </div>
+    <script>
+        let text = document.getElementById("demo").innerHTML;
+        document.getElementById("demo").innerHTML = text.replace("Microsoft", "W3Schools");
+        /*upper case*/
+        let txt = document.getElementById("upperCase").innerHTML;
+        document.getElementById("upperCase").innerHTML = txt.toUpperCase();
+        /* lower Case*/
+        <!-- Lower Case -->
+        let lowerCase = document.getElementById("lowerCase").innerHTML;
+        document.getElementById("lowerCase").innerHTML = lowerCase.toLowerCase();
+        /*alert box*/
+        function myFunction() {
+            alert("Hello! I am an alert box!");
+        }
+        /*get element*/
+
+        const fruits = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+        const citrus = fruits.slice(1, 2);
+
+        const fruitt = ["Banana", "Orange", "Apple", "Kiwi"];
+        const a = fruitt.splice(1, 2); //remove element
+
+        document.getElementById("demo").innerHTML = citrus;
+        document.getElementById("demo1").innerHTML = a;
+        document.getElementById("demo2").innerHTML = fruitt;
+
+        //concat( concatenates array )
+        const arr1 = ["Cecilie", "Lone"];
+        const arr2 = ["Emil", "Tobias", "Linus"];
+
+        const children = arr1.concat(arr2);
+        document.getElementById("demo").innerHTML = children;
+
+        //sort
+
+        const sort = ["minh", "viet", "trung", "huy"];
+        document.getElementById("beforeSort").innerHTML = sort;
+        const afSort = sort.sort();
+        document.getElementById("afterSort").innerHTML = afSort;
+
+        // get Date
+
+        const d = new Date();
+        document.getElementById("date").innerHTML = d;
+
+        function showDate() {
+            alert(d);
+        }
+
+        const year = d.getFullYear();
+
+        function showYear() {
+            alert(year);
+        }
+
+        const month = d.getMonth();
+
+        function showMonth() {
+            alert(month);
+        }
+        const oldYear = new Date();
+        const newYear = new Date();
+        const testYear = newYear.setFullYear(2020);
+
+
+        document.getElementById("oldYear").innerHTML = oldYear;
+        document.getElementById("setYear").innerHTML = newYear;
+
+        const random = Math.random();
+
+        function randomNumber() {
+            alert(random);
+        }
+        //max
+        let findMax = Math.max(10, 20);
+
+        function findToMax() {
+            alert(findMax);
+        }
+        //min
+        let findMin = Math.min(10, 20);
+
+        function findToMin() {
+            alert(findMin);
+        }
+
+        //Math method to round a number to the nearest integer.
+
+        let nearest = Math.round(3.4);
+
+        function nearest_integer() {
+            alert(nearest);
+
+        }
+
+        let square = Math.sqrt(64)
+
+        function squareRoot() {
+            alert(square);
+        }
+
+        //comparison
+        function comparison() {
+            let age = document.getElementById("age").value;
+            let vote = (age < 18) ? "young" : "old";
+            document.getElementById("comparison").innerHTML = vote
+            alert(vote)
+        }
+
+        //NaN
+        let result =
+            "Is '123' NaN? " + isNaN('123') + "<br>" +
+            "Is 'Hello' NaN? " + isNaN('Hello') + "<br>" +
+            "Is '2005/12/12' NaN? " + isNaN('2005/12/12');
+        document.getElementById("nan").innerHTML = result;
+
+        //slice
+
+        const name = ["minh", "viet", "trung", "huy"];
+        document.getElementById("slice").innerHTML = name.slice(1, 2);
+
+        //splice
+
+        document.getElementById("splice").innerHTML = name.splice(1, 2);
+    </script>
+
+</body>
+
+</html>
