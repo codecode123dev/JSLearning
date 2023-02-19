@@ -8,7 +8,7 @@
     <title>Document</title>
 </head>
 
-<body>
+<>
     <p>replace() searches a string for a value, and returns a new string with the specified value(s) replaced:</p>
 
     <p id="demo">Visit Microsoft!</p>
@@ -122,6 +122,51 @@
         <p>Splice (remove Element)</p>
         <p id="splice"></p>
     </div>
+
+    <!---------------------------------------- 19_02_2023 ---------------------------------------->
+    <!-- Switch case -->
+    <div>
+        Switch Case:
+        <button onclick="switch_case()">click</button>
+    </div>
+
+    <div>
+        <input type="number" id="input">
+        <button onclick="input_fruits()" id="input">click</button>
+
+    </div>
+
+    <div>
+        <p id="print"></p>
+
+    </div>
+
+
+    <!-- For in -->
+    <div>
+        <p id="for_in"></p>
+
+    </div>
+
+    <p id="print_index_in_arrays"></p>
+
+    <p id="print_value_in_arrays"></p>
+
+    <div>
+        Demo forEach(value):
+        <p id="demo_forEach"></p>
+    </div>
+
+    <div>
+        Demo forEach(index)
+        <p id="demo_forEach_index"></p>
+    </div>
+
+    <div>
+        While loop:
+        <p id="while_loop"></p>
+    </div>
+
     <script>
         let text = document.getElementById("demo").innerHTML;
         document.getElementById("demo").innerHTML = text.replace("Microsoft", "W3Schools");
@@ -246,8 +291,141 @@
         //splice
 
         document.getElementById("splice").innerHTML = name.splice(1, 2);
+
+        //switch_case
+
+        let day;
+
+        switch (new Date().getDay()) {
+            case 0:
+                day = "Sunday";
+                break;
+            case 1:
+                day = "Monday";
+                break;
+            case 2:
+                day = "Tuesday";
+                break;
+            case 3:
+                day = "Wednesday";
+                break;
+            case 4:
+                day = "Thursday";
+                break;
+            case 5:
+                day = "Friday";
+                break;
+            case 6:
+                day = "Saturday";
+        };
+
+
+        function switch_case() {
+            alert("Today is " + day);
+
+        }
+
+        function input_fruits() {
+            let input = document.getElementById("input").value;
+
+
+            alert(input);
+            /*
+                        switch (input_number) {
+                            case 1:
+                                alert("Apple");
+                                break;
+                            case 2:
+                                alert("Banana");
+                                break;
+                            case 3:
+                                alert("Watermelon");
+                                break;
+                            case 4:
+                                alert("Mango");
+                                break;
+                            case 5:
+                                alert("Coconut");
+                                break;
+                            default:
+                                alert("Please enter again!");
+                                break;
+                            };
+                            */
+
+        };
+
+        var name_fruits = ["Apple", "Banana", "Watermelon", "Mango", "Coconut"];
+        var name1 = "Name Fruits: ";
+        for (let i = 0; i < name_fruits.length; i++) {
+            name1 += name_fruits[i] + ",";
+        }
+        document.getElementById("print").innerHTML = name1;
+
+
+
+        const person = {
+            fname: "John",
+            lname: "Doe",
+            age: 25
+        };
+
+        let txt_person = "";
+        for (let x in person) {
+            txt_person += person[x] + " ";
+        }
+
+        document.getElementById("for_in").innerHTML = txt_person;
+        //for in
+        let country = ["Canada", "Viet Nam", "lao", "USA", "China"];
+
+        for (let x in country) {
+            document.getElementById("print_index_in_arrays").innerHTML += x;
+        }
+        //for of
+
+        let cars = ["BMW", "Mec", "Toyota", "Volvo", "Audi"];
+
+        for (let x of cars) {
+            document.getElementById("print_value_in_arrays").innerHTML += x + ",";
+        }
+
+
+        //foreach
+
+        let numbers = [90, 22, 64, 1, 78, 12, 36];
+
+        let txtNumber = "";
+
+        function myArrays(value, index, array) {
+            txtNumber += value + "<br>";
+        }
+        numbers.forEach(myArrays);
+        document.getElementById("demo_forEach").innerHTML = txtNumber;
+
+
+        let txtNumberIndex = "";
+
+        function myArraysIndex(value, index, array) {
+            txtNumberIndex += index + ",";
+        }
+        numbers.forEach(myArraysIndex);
+        document.getElementById("demo_forEach_index").innerHTML = txtNumberIndex;
+
+
+
+        //while loop
+
+        let text_while = "";
+        let i = 0;
+        while (i < 10) {
+            text_while += i + ",";
+            i++;
+
+        }
+        document.getElementById("while_loop").innerHTML = text_while;
     </script>
 
-</body>
+    </body>
 
 </html>
