@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body onload="startTime()">
+
+    <div>
+        <h1>The Window Object</h1>
+        <h2>The SetTimeout() and clearTimeout() Methods</h2>
+        <p>Click "stop" to prevent myGreeting() (you have 5 seconds)</p>
+
+        <button onclick="myStopFunction()">Stop!</button>
+
+        <h2 id="setTimeout"></h2>
+
+    </div>
+
+    <div>
+        <p>Click the button . Wait 3 seconds for alert "Hello"</p>
+        <button onclick="test_setTime_alert()">click</button>
+
+    </div>
+    <!-- show seconds -->
+    <div>
+        <p>The Input field will show you the seconds</p>
+        <input type="text" id="txt">
+
+    </div>
+    <!-- Show Window -->
+    <div>
+        Click the button to open a new window and close the window after 5 seconds
+        <button onclick="openWin()">click</button>
+    </div>
+
+    <div>
+        <!-- EX: -->
+        <h2>The setTimeout() and clearTimeout() Methods</h2>
+
+        <button onclick="startCount()">Start count!</button>
+        <input type="text" id="counting">
+        <button onclick="stopCount()">Stop count!</button>
+
+        <p>Click on "Start count!" to start the timer. The input field will count forever, starting at 0.</p>
+
+        <p>Click on "Stop count!" to stop counting. Click on "Start count!" to start the timer again.</p>
+
+    </div>
+
+    <div>
+        <h2>The setTimeout Method</h2>
+        <p id="real_time"></p>
+    </div>
+
+    <div>
+        <p>In this example, we display the parameters passed to myFunc() (does not work in IE9 and earlier).</p>
+
+        <p id="display_param"></p>
+    </div>
+
+    <div>
+        <p>In this example, we display the parameters passed to myFuncc().</p>
+        <p id="display_param1"></p>
+    </div>
+
+    <script>
+        const myTimeout = setTimeout(myGreeting, 5000);
+
+        function myGreeting() {
+            document.getElementById("setTimeout").innerHTML = "Welcome";
+
+        }
+
+        function myStopFunction() {
+            clearTimeout(myTimeout);
+        }
+
+
+
+        //setTimeout_alert
+
+        let timeout;
+
+        function test_setTime_alert() {
+            timeout = setTimeout(alertFunc, 3000)
+        }
+
+        function alertFunc() {
+            alert("Hello Sir");
+        }
+
+
+        //show seconds 
+
+        let x = document.getElementById("txt");
+        setTimeout(function() {
+            x.value = "2 seconds"
+        }, 2000);
+        setTimeout(function() {
+            x.value = "4 seconds"
+        }, 4000);
+        setTimeout(function() {
+            x.value = "6 seconds"
+        }, 6000);
+        setTimeout(function() {
+            x.value = "7 seconds"
+        }, 7000);
+        setTimeout(function() {
+            x.value = "9 seconds"
+        }, 9000);
+
+
+        //Show Window
+
+        function openWin() {
+            const myWindow = window.open("", "", "width = 400", "height=600")
+            setTimeout(function() {
+                myWindow.close()
+            }, 5000);
+        }
+
+        //Start, stop count
+
+        let counter = 0;
+        let timeoutt;
+        let timer_on = 0;
+
+        function timedCount() {
+            document.getElementById("counting").value = counter;
+            counter++;
+            timeoutt = setTimeout(timedCount, 1000);
+        }
+
+        function startCount() {
+            if (!timer_on) {
+                timer_on = 1;
+                timedCount();
+            }
+        }
+
+        function stopCount() {
+            clearTimeout(timeoutt);
+            timer_on = 0;
+        }
+
+        //real Time
+        function startTime() {
+            const date = new Date();
+            document.getElementById("real_time").innerHTML = date.toLocaleTimeString(); // chi hiển thị thời gian
+            setTimeout(function() {
+                startTime() // mỗi một giây sẽ tăng thêm 
+            }, 1000)
+        }
+
+        //pass parameter
+        setTimeout(myFunc, 1000, "Param1", "Param2");
+
+        function myFunc(p1, p2) {
+            document.getElementById("display_param").innerHTML = "parameter " + p1 + " " + p2;
+        }
+
+        //
+
+        setTimeout(function() {
+            myFuncc("param1", "param2")
+        }, 2000);
+
+        function myFuncc(p1, p2) {
+            document.getElementById("display_param1").innerHTML = "Parameter " + p1 + " " + p2
+        }
+    </script>
+</body>
+
+</html>
