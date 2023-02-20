@@ -167,6 +167,52 @@
         <p id="while_loop"></p>
     </div>
 
+    <!-- 20/02/2023 -->
+    <div>
+        <p id="async_function"></p>
+
+    </div>
+
+    <div>
+        Calculator:
+        <p id="sum1"></p>
+    </div>
+
+    <div>
+        destructure:
+        <p id="destructure"></p>
+    </div>
+
+    <div>
+        <p id="cal"></p>
+    </div>
+
+    <div>
+        Spread mix with destructure:
+        <p id="spread_destructure"></p>
+    </div>
+
+    <div>
+        spread:
+        <p id="spread"></p>
+
+    </div>
+
+    <div>
+        Rest:
+        <p id="sum_rest"></p>
+    </div>
+
+    <div>
+        The result of the calculator is:
+        <p id="callBack"></p>
+    </div>
+
+    <div>
+        Demo Callback:
+        <p id="demo_callBack"></p>
+    </div>
+
     <script>
         let text = document.getElementById("demo").innerHTML;
         document.getElementById("demo").innerHTML = text.replace("Microsoft", "W3Schools");
@@ -182,6 +228,7 @@
             alert("Hello! I am an alert box!");
         }
         /*get element*/
+
 
         const fruits = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
         const citrus = fruits.slice(1, 2);
@@ -424,6 +471,155 @@
 
         }
         document.getElementById("while_loop").innerHTML = text_while;
+
+
+        //async Function
+        function myDisplay(some) {
+            document.getElementById("async_function").innerHTML = some;
+
+        }
+
+        async function myFunction() {
+            return "Hello";
+        }
+
+        myFunction().then(
+            function(value) {
+                myDisplay(value);
+            },
+            function(error) {
+                myDisplay(error);
+            }
+        );
+
+
+        function myDisplay1(some) {
+            document.getElementById("sum1").innerHTML = some
+        }
+
+        function myCalculator(sum1, sum2) {
+            let sum = sum1 + sum2;
+            return sum;
+
+        }
+
+        let result1 = myCalculator(5, 6);
+        myDisplay1(result1);
+
+        //destructure
+
+        const vehicleOne = {
+            brand: "Ford",
+            model: "Mustang",
+            type: "car",
+            year: 2020,
+            color: "red",
+            registration: {
+                city: "Houston",
+                state: "Texas",
+                country: "USA"
+            }
+        }
+
+        myVehicle(vehicleOne)
+
+        function myVehicle({
+            model,
+            registration: {
+                state
+            }
+        }) {
+            const message = "My " + model + " is registered in " + state + ".";
+            document.getElementById("destructure").innerHTML = message;
+        }
+
+
+        const vehicle = ["mustang", "150", "expedition"]
+
+        const [car, , suv] = vehicle;
+
+        function calculator(a, b) {
+            const add = a + b;
+            const subtract = a - b;
+            const multiply = a * b;
+            const divide = a / b;
+
+            return [add, subtract, multiply, divide];
+
+        }
+
+        const [add, subtract, multiply, divide] = calculator(5, 6);
+        const cal = [add, subtract, multiply, divide];
+
+        document.getElementById("cal").innerHTML = cal;
+
+        const number_spread = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+        const [one, two, ...rest] = number_spread;
+
+
+        document.getElementById("spread_destructure").innerHTML = [one, two, ...rest];
+
+        const arrOne = [1, 5, 8, 9, 1];
+        const arrTwo = [9, 8, 4, 2, 3];
+
+        const arr = [...arrOne, ...arrTwo];
+
+        document.getElementById("spread").innerHTML = arr
+
+
+        function sum_rest(...args) {
+            let sum_rest = 0;
+            for (let arg of args) sum_rest += arg;
+            return sum_rest;
+
+        }
+
+        let x = sum_rest(9, 8, 5, 6, 7, 1, 7, 2, 10);
+
+        document.getElementById("sum_rest").innerHTML = x;
+
+        //callBack
+        function myDisplayCallback(some) {
+            document.getElementById("callBack").innerHTML = some;
+        }
+
+        function myCalculatorCallback(numCall1, numCall2, myCallback) {
+            let sumCall = numCall1 + numCall2;
+            myCallback(sumCall);
+        }
+
+        myCalculatorCallback(5, 5, myDisplayCallback);
+
+        //In the example above, myDisplayCallback is a called a callback function.
+
+        //It is passed to myCalculatorCallback() as an argument.
+
+        //Call Back
+
+        //create an array
+        const myNumbers = [4, 5, 6, -20, 10, -9, 7];
+        //Call removeNeg with a CallBack
+        //const posNumbers = removeNeg(myNumbers, (x) => x >= 0);
+        //the same function:
+
+        const posNumbers = removeNeg(myNumbers, function(x) {
+            return (x >= 0);
+        })
+
+        //Display Result
+        document.getElementById("demo_callBack").innerHTML = posNumbers;
+        //Remove negative numbers
+
+        function removeNeg(numbers, callback) {
+            const myArray = [];
+            for (const x of numbers) {
+                if (callback(x)) {
+                    myArray.push(x);
+                }
+            }
+            return myArray;
+        }
     </script>
 
     </body>
