@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #myDiv1,
+        #myDiv2 {
+            background-color: coral;
+            padding: 50px;
+        }
+        
+        #myP1,
+        #myP2 {
+            background-color: white;
+            font-size: 20px;
+            border: 1px solid;
+            padding: 20px;
+        }
+        
+        #animation {
+            width: 100%;
+            height: 100px;
+            background: orange;
+            position: relative;
+            font-size: 18px;
+            padding: 16px;
+        }
+        
+        @keyframes mymove {
+            from {
+                top: 0px;
+            }
+            to {
+                top: 200px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Syntax: element.addEventListener(event, function, useCapture) -->
+    <!-- 
+        event : The name of the event(EX: use "click" not "onclick"  )(required)
+        function: the  function to run when event occurs(required)
+        useCapture: default is false
+            false - The handler is executed in the bubbling phase.(thực hiện theo tuần tự)
+            true - The handler is executed in the capturing phase.(thực hiện theo ngược lại)
+
+            vd: click vào button từ 1 đến5 thì false => 1,2,3,4,5
+                                                true => 5,4,3,2,1
+
+     -->
+
+    <!-- Add a click event to a button -->
+    <div>
+        CLick Event:
+        <button id="clickEvent">click</button>
+        <p id="printClick"></p>
+
+    </div>
+
+    <!-- ex2: -->
+
+    <div>
+        <p>Add two click events to the same button</p>
+        <button id="clickEvent2">click2</button>
+        <p id="printClick2"></p>
+    </div>
+
+    <!-- MouseOver, mouseout event -->
+
+    <div>
+        <p>The addEventListener() Method(MouseOver,mouseout)</p>
+        <button id="mouse_over_out">mouse</button>
+        <p id="show_text"></p>
+
+    </div>
+
+    <!-- Calculator -->
+
+    <div>
+        <p>Click the button to perform a calculator</p>
+        <p> 5 * 6 =</p>
+        <button id="calculator">result</button>
+        <p id="result"></p>
+    </div>
+
+
+    <!-- Change background color -->
+
+    <div>
+        <button id="change_color">click</button>
+    </div>
+
+    <div>
+        change color:
+        <button id="change_color2">click</button>
+    </div>
+
+    <!-- afterprint -->
+
+    <div>
+        <p><b>Tip</b>: T</p>
+    </div>
+    <!-- Bubbling, Capturing -->
+
+    <div id="myDiv1">
+        <h2>Bubbling:</h2>
+        <p id="myP1">Click </p>
+
+    </div><br>
+
+    <div id="myDiv2">
+        <h2>Capturing</h2>
+        <p id="myP2">Click</p>
+    </div>
+
+    <!-- adoptNode() method -->
+
+    <iframe id="myFrame" src="/default.asp" style="height:380px;width:520px;"></iframe>
+    <p>Click "Try it" to adopt the first H1 element in the iframe.</p>
+
+    <button onclick="myFunction()">Try it</button>
+
+
+    <!-- anchors -->
+
+    <h1>The document object</h1>
+    <a href="" name="html">HTML</a>
+    <a href="" name="CSS"> CSS</a>
+    <a href="" name="xml"> XML</a>
+
+    <p>The number of anchors in this document is: </p>
+
+    <p id="anchors_num"></p>
+
+    <p id="anchors_content"></p>
+
+    <!-- removeEventListener -->
+
+    <div id="myDIV1">
+        <p>Click the button to remove the div's event handler.</p>
+        <button onclick="removeHandler()" id="myBtn1">Remove</button>
+    </div>
+
+    <p id="demo1"></p>
+
+    <!-- onblur -->
+    <div>
+        Enter name:<input type="text" id="fname" onblur="myOnblur()">
+        <!-- When you leave the input field, transforms the input text to upper case -->
+    </div>
+
+
+    <!-- animation -->
+
+    <h2>The animationstart, animationiteration and animationend Events</h2>
+
+    <div id="animation" onclick="myAnimation()">Start</div>
+
+    <!-- onbeforeprint -->
+
+    <div>
+        Ctrl+P prints a page
+
+    </div>
+
+    <!-- beforeunload -->
+    <div>
+        beforeunload:
+        <a href="https://www.w3schools.com">click here</a>
+    </div>
+
+    <!-- blur -->
+    <div>
+        <p>Write something in the input field, and then click outside the field to lose focus (blur).</p>
+        <input type="text" id="blur">
+    </div>
+
+
+
+    <script>
+        // Add a click event to a button
+        const element = document.getElementById("clickEvent");
+        element.addEventListener("click", function() {
+            document.getElementById("printClick").innerHTML = "hello"
+        })
+
+
+        //Ex2:
+        const element2 = document.getElementById("clickEvent2");
+        element2.addEventListener("click", myfunction1);
+        element2.addEventListener("click", myFunction2)
+
+        function myfunction1() {
+            document.getElementById("printClick2").innerHTML += " First";
+
+        }
+
+        function myFunction2() {
+            document.getElementById("printClick2").innerHTML += " Second";
+        }
+
+        //mouse over, out
+
+        let mouse = document.getElementById("mouse_over_out");
+        mouse.addEventListener("mouseover", functionMouseOver);
+        mouse.addEventListener("mouseout", functionMouseOut);
+
+        function functionMouseOver() {
+            document.getElementById("show_text").innerHTML += " mouse over ";
+
+        }
+
+        function functionMouseOut() {
+            document.getElementById("show_text").innerHTML += " mouse out "
+        }
+
+
+        //calculator
+
+        let a = 5;
+        let b = 6;
+
+        document.getElementById("calculator").addEventListener("click", function() {
+            functionCalculator(a, b);
+        });
+
+        function functionCalculator(a, b) {
+            document.getElementById("result").innerHTML = a * b
+        }
+        // change color
+
+        document.getElementById("change_color").addEventListener("click", function() {
+            this.style.backgroundColor += "blue"
+        });
+
+
+        //
+        let change_color_button = document.getElementById("change_color2");
+        change_color_button.addEventListener("mouseover", functionChangeColorOver);
+        change_color_button.addEventListener("mouseout", functionChangeColorOut);
+
+        function functionChangeColorOver() {
+            this.style.backgroundColor = "red"
+        }
+
+        function functionChangeColorOut() {
+            this.style.backgroundColor = "blue"
+        }
+
+        //Bubbling, Capturing
+
+        document.getElementById("myP1").addEventListener("click", function() {
+            alert("You clicked the white element!")
+        }, false);
+
+        document.getElementById("myDiv1").addEventListener("click", function() {
+            alert("You clicked the orange element")
+        }, false);
+
+        document.getElementById("myP2").addEventListener("click", function() {
+            alert("You clicked the white element!")
+        }, true);
+
+        document.getElementById("myDiv2").addEventListener("click", function() {
+            alert("You clicked the orange element")
+        }, true);
+
+        function myFunction() {
+            const frame = document.getElementById("myFrame");
+            const h1 = frame.contentWindow.document.getElementsByTagName("H1")[0];
+            const node = document.adoptNode(h1);
+            document.body.appendChild(node);
+        }
+
+        // anchors
+
+        let num = document.getElementsByTagName("a").length;
+        document.getElementById("anchors_num").innerHTML = num;
+
+        let content = document.getElementsByTagName("a")[2].innerHTML;
+        document.getElementById("anchors_content").innerHTML = content;
+
+        // removeHandler
+
+        document.getElementById("myDIV1").addEventListener("mousemove", myFunction);
+
+        function myFunction() {
+            document.getElementById("demo1").innerHTML = Math.random();
+        }
+
+        function removeHandler() {
+            document.getElementById("myDIV1").removeEventListener("mousemove", myFunction);
+        }
+
+        //onblur
+
+        function myOnblur() {
+            var x = document.getElementById("fname");
+            x.value = x.value.toUpperCase();
+        }
+
+        // animation
+
+        const div1 = document.getElementById("animation");
+
+        function myAnimation() {
+            div1.style.animation = "mymove 2s 2"
+        }
+
+        div1.addEventListener("animationstart", myStartFunction);
+        div1.addEventListener("animationiteration", myRepeatFunction);
+        div1.addEventListener("animationend", myEndFunction)
+
+        function myStartFunction() {
+            this.innerHTML = "Start";
+            this.style.backgroundColor = "pink";
+        }
+
+        function myRepeatFunction() {
+            this.innerHTML = "next";
+            this.style.backgroundColor = "red";
+        }
+
+        function myEndFunction() {
+            this.innerHTML = "end";
+            this.style.backgroundColor = "lightgray";
+        }
+
+        window.addEventListener("beforeprint", myBeforeprint)
+
+        function myBeforeprint() {
+            alert("Print!!!")
+        }
+
+        //beforeunload
+
+        window.addEventListener("beforeunload", function(event) {
+            event.returnValue = "Write something clever here"
+        });
+
+        //blur
+
+        document.getElementById("blur").addEventListener("blur", myBlur);
+
+        function myBlur() {
+            alert("Input field lost focus")
+        }
+    </script>
+
+
+
+
+</body>
+
+</html>
