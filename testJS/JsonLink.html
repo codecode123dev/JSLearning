@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <div id="demo">
+        <h2>XMLHttpRequest</h2>
+        <button type="button" onclick="loadDoc('url',myFunction)">Change</button>
+        <div id="data_render"></div>
+    </div>
+
+
+    <script>
+        /*
+                                                function loadDoc() {
+                                                    const xhttp = new XMLHttpRequest();
+                                                    xhttp.onload() = function() {
+                                                        document.getElementById("demo").innerHTML = this.responseText;
+
+                                                    }
+                                                    var url = "https://jsonplaceholder.typicode.com/users"
+                                                    xhttp.open("GET", url, true);
+                                                    xhttp.send();
+                                                }
+                                                */
+
+
+        function loadDoc(url, cFunction) {
+            var url = "https://jsonplaceholder.typicode.com/users";
+            var xhttp;
+            xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    cFunction(this);
+                }
+            };
+
+            xhttp.open("GET", url, true);
+            xhttp.send();
+        }
+
+        function myFunction(xhttp) {
+            const obj = JSON.parse(xhttp.responseText);
+            console.log(obj);
+
+            //document.getElementById("data_render").innerHTML =xhttp.responseText;
+            tableFromJson(obj);
+
+        }
+
+        let tableFromJson = (obj) => {
+            // the json data.
+
+
+            console.log(obj);
+            // Extract value from table header. 
+            // ('Book ID', 'Book Name', 'Category' and 'Price')
+            let col = [];
+            for (let i = 0; i < obj.length; i++) {
+                for (let key in obj[i]) {
+                    if (col.indexOf(key) === -1) {
+                        col.push(key);
+                    }
+                }
+            }
+
+            // Create a table.
+            const table = document.createElement("table");
+
+            // Create table header row using the extracted headers above.
+            let tr = table.insertRow(-1); // table row.(appended as the last row )
+
+            for (let i = 0; i < col.length; i++) {
+                let th = document.createElement("th"); // table header.
+                th.innerHTML = col[i];
+                tr.appendChild(th);
+            }
+
+            // add json data to the table as rows.
+            for (let i = 0; i < obj.length; i++) {
+                tr = table.insertRow(-1);
+                for (let j = 0; j < col.length; j++) {
+                    let tabCell = tr.insertCell(-1); //(appended as the last cell)
+                    tabCell.innerHTML = obj[i][col[j]]; // Get book details for each header.
+                }
+            }
+            // Now, add the newly created table with json data, to a container.
+            const divShowData = document.getElementById('data_render');
+            divShowData.innerHTML = "";
+            divShowData.appendChild(table);
+        }
+    </script>
+</body>
+
+</html>
