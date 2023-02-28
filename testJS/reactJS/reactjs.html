@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <!-- arrow function -->
+      <p id="arrowfucntion"></p>
+    </div>
+    <!-- Regular function -->
+
+    <button id="btn">click</button>
+    <p id="regular_function"></p>
+
+    <!-- Destructuring Object -->
+
+    <div>
+      Destructuring object:
+      <p id="destructuring_obj"></p>
+    </div>
+
+    <!-- destructuring nested object -->
+    <div>
+      destructuring_nested_object:
+      <p id="destructuring_nested_object"></p>
+    </div>
+
+    <!-- Modules -->
+
+    <div>
+      Export form file person:
+      <p id="modules"></p>
+    </div>
+
+    <script>
+      // class Car {
+      //   constructor(name) {
+      //     this.brand = name;
+      //   }
+      // }
+      // const mycar = new Car("Ford");
+      // class Car {
+      //   constructor(name) {
+      //     this.brand = name;
+      //   }
+
+      //   present() {
+      //     return "I have a " + this.brand;
+      //   }
+      // }
+
+      // const mycar = new Car("name");
+
+      // document.write(mycar.present());
+      class Car {
+        constructor(name) {
+          this.brand = name;
+        }
+
+        present() {
+          return "I have a " + this.brand;
+        }
+      }
+
+      class Model extends Car {
+        constructor(name, mod) {
+          super(name);
+          this.model = mod;
+        }
+        show() {
+          return this.present() + ", it is a " + this.model;
+        }
+      }
+
+      const mycar = new Model("Ford", "Mustang");
+      document.write(mycar.show());
+      //Arrow function
+      hello = (val) => "Hello " + val;
+
+      document.getElementById("arrowfucntion").innerHTML = hello("World");
+
+      //Regular function
+
+      class Header {
+        constructor() {
+          this.color = "Red";
+        }
+
+        //object
+        changeColor = () => {
+          document.getElementById("regular_function").innerHTML += this;
+        };
+
+        //Window
+        // changeColor = function(){
+        //   document.getElementById("regular_function").innerHTML += this;
+
+        // }
+      }
+      //Destructing Arrays
+      const myheader = new Header();
+      window.addEventListener("load", myheader.changeColor);
+
+      document
+        .getElementById("btn")
+        .addEventListener("click", myheader.changeColor);
+      //Destructuring
+      function calculate(a, b) {
+        const add = a + b;
+        const subtract = a - b;
+        const multiply = a * b;
+        const divide = a / b;
+        return [add, subtract, multiply, divide];
+      }
+
+      const [add, subtract, multiply, divide] = calculate(4, 7);
+
+      document.write("<p> Sum: " + add + "</p>");
+      document.write("<p> Difference" + multiply + "</p>");
+      document.write("<p>Product: " + multiply + "</p>");
+      document.write("<p>Quotient " + divide + "</p>");
+
+      //Destructuring Objects
+
+      // const car = {
+      //   brand: "Ford",
+      //   model: "Mustang",
+      //   type: "car",
+      //   year: 2021,
+      //   color: "red",
+      // };
+
+      // myCar(car);
+      // function myCar({ type, color, brand, model }) {
+      //   const message =
+      //     "My" + type + "is a" + color + " " + brand + " " + model + ".";
+      //   document.getElementById("destructuring_obj").innerHTML = message;
+      // }
+      // nested object
+      const vehicleOne = {
+        brand: "Ford",
+        model: "Mustang",
+        type: "car",
+        year: 2021,
+        color: "red",
+        registration: {
+          city: "Houston",
+          state: "Texas",
+          country: "USA",
+        },
+      };
+
+      myVehicle(vehicleOne);
+
+      function myVehicle({ model, registration: { state } }) {
+        const message = "My " + model + " is registered in " + state + ".";
+
+        document.getElementById("destructuring_nested_object").innerHTML =
+          message;
+      }
+      // Spread Operator
+
+      const numbersOne = [1, 2, 3];
+      const numbersTwo = [4, 5, 6];
+      const numbersCombined = [...numbersOne, ...numbersTwo];
+
+      document.write("Spread Operator: " + numbersCombined);
+
+      //The spread operator is often used in combination with destructuring.
+
+      document.write("<div>the spread combination with destructuring:</div>");
+      const numbers = [1, 2, 3, 4, 5, 6, 7, 8];
+      const [one, two, ...nest] = numbers;
+
+      document.write("<p>" + one + "</p>");
+      document.write("<p>" + two + "</p>");
+      document.write("<p>" + nest + "</p>");
+
+      //import, export
+      import { name, age } from "./person";
+
+      document.getElementById("modules").innerHTML = "My name is " + name;
+      document.getElementById("modules").innerHTML += ", I am " + age + ".";
+    </script>
+  </body>
+</html>

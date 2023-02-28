@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div>
+        Import file person:
+        <p id="person"></p>
+    </div>
+
+    <div>
+        Import file message:
+        <p id="message"></p>
+    </div>
+
+    <script type="module">
+    import { name, age } from "./person.js";
+    document.getElementById("person").innerHTML = "My name is " + name;
+    document.getElementById("person").innerHTML += ", I am " + age + ".";
+
+
+    import message from "./message.js";
+
+    document.getElementById("message").innerHTML = message()
+    </script>
+</body>
+</html>
